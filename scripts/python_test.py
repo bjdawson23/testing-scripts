@@ -26,3 +26,19 @@ print("Number\tSquare\tCube")  # Header row
 for num in range(6):  # Iterate from 0 to 5
     print(f"\t{num}\t\t\t{num**2}\t\t\t{num**3}")  # Print values with tab spacing
 
+
+print (ord('a'))
+
+
+# Get user input
+num = input("Enter a five-digit number: ")
+
+# Check if input is exactly five digits
+if len(num) == 5 and num.isdigit():
+    # Separate digits with three spaces
+    print("   ".join(num))
+else:
+    print("Invalid input. Please enter a five-digit integer.")
+
+
+
