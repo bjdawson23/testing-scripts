@@ -1,5 +1,36 @@
 # Online Python - IDE, Editor, Compiler, Interpreter
 
+from pathlib import Path
+
+for i in range(1, 5):
+    folder_name = f"folder_{i}"
+    Path(folder_name).mkdir(exist_ok=True)
+    print(f"Folder '{folder_name}' created.")
+
+
+sales = [200, 1500, 3000, 100, 5000]
+for sale in sales:
+    if sale > 2500:
+        print(f"Found a sale above the threshold: {sale}")
+        break  # Exit the loop as soon as we find the first sale above 2500
+
+
+sales = [200, 1500, 3000, 100, 5000]
+
+for sale in sales:
+    if sale > 4000:
+        print(f"Found a sale above the threshold: {sale}")
+        break
+
+sales = [200, 1500, 3000, 100, 5000]
+
+for sale in sales:
+    if sale < 1000:
+        continue  # Skip sales that are less than 1000
+    print(f"Processing significant sale: {sale}")
+
+
+
 pie = 3.14159
 radius = 5
 circumference = 2*pie*radius
