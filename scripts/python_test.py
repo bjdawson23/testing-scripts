@@ -41,4 +41,9 @@ else:
     print("Invalid input. Please enter a five-digit integer.")
 
 
+sales: list = [12000, 15000, 18000, 13000, 17000]
+for sale in sales:
+    print(f"Monthly sales: {sale}")
+
+
 
