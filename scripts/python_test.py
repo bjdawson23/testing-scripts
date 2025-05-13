@@ -18,6 +18,8 @@ if len(number) == 5 and number.isdigit():
 else:
     print("Invalid input! Please enter a five-digit integer.")
 
+for character in 'Branton':
+    print(character, end=" ")
 
 
 sales = [200, 1500, 3000, 100, 5000]
