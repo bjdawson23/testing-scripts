@@ -21,6 +21,108 @@ else:
 for character in 'Branton':
     print(character, end=" ")
 
+for character in reversed('Branton'):
+    print(character, end=" ")
+
+for character in 'Branton':
+    print(character.upper(), end=" ")
+
+for character in 'Branton':
+    print(character.lower(), end=" ")
+
+for index, character in enumerate('Branton'):
+    print(f"Index {index}: {character}")
+
+vowels = "AEIOUaeiou"
+for character in 'Branton':
+    if character in vowels:
+        print(character, end=" ")
+
+vowels = "AEIOUaeiou"
+for character in 'Branton':
+    if character not in vowels:
+        print(character, end=" ")
+
+vowels = "AEIOUaeiou"
+vowel_count = 0
+consonant_count = 0
+for character in 'Branton':
+    if character in vowels:
+        vowel_count += 1
+    elif character.isalpha():  # Ensures non-alphabet characters aren’t counted
+        consonant_count += 1
+print(f"Vowels: {vowel_count}, Consonants: {consonant_count}")
+
+vowels = "AEIOUaeiou"
+uppercase_count = 0
+lowercase_count = 0
+for character in 'Branton':
+    if character.isupper():
+        uppercase_count += 1
+    elif character.islower():
+        lowercase_count += 1
+print(f"Uppercase letters: {uppercase_count}, Lowercase letters: {lowercase_count}")
+
+uppercase_count = 0
+lowercase_count = 0
+digit_count = 0
+special_count = 0
+text = "Branton123!@#"
+for character in text:
+    if character.isupper():
+        uppercase_count += 1
+    elif character.islower():
+        lowercase_count += 1
+    elif character.isdigit():
+        digit_count += 1
+    else:
+        special_count += 1
+print(f"Uppercase letters: {uppercase_count}")
+print(f"Lowercase letters: {lowercase_count}")
+print(f"Digits: {digit_count}")
+print(f"Special characters: {special_count}")
+
+text = "Branton123!@#"
+filtered_text = ""
+for character in text:
+    if character.isalpha():  # Keeps only letters (A-Z, a-z)
+        filtered_text += character
+print(f"Filtered text (only letters): {filtered_text}")
+
+text = "Branton123!@#"
+modified_text = ""
+for character in text:
+    if character.isdigit():
+        modified_text += "*"
+    else:
+        modified_text += character
+print(f"Modified text (digits replaced): {modified_text}")
+
+text = "Branton123!@#"
+filtered_text = "".join(sorted([c for c in text if c.isalpha()]))
+print(f"Sorted text (only letters): {filtered_text}")
+
+
+
+
+grades = [70, 80, 82, 90, 65, 92, 85, 100, 82]
+
+# Initialize a variable to store the total sum of grades
+total = 0
+
+# Iterate through the list and add each grade to the total
+for grade in grades:
+    total += grade
+
+# Calculate the average
+average = total / len(grades)
+
+print(f"The average grade is: {average:.2f}")
+
+
+
+
+
 
 sales = [200, 1500, 3000, 100, 5000]
 for sale in sales:
