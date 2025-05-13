@@ -122,6 +122,43 @@ print(f"The average grade is: {average:.2f}")
 
 
 
+grades = [70, 80, 82, 90, 65, 92, 85, 100, 82]
+
+# Remove the lowest grade
+grades.remove(min(grades))
+
+# Initialize total sum
+total = 0
+
+# Calculate the sum using a loop
+for grade in grades:
+    total += grade
+
+# Compute the average
+average = total / len(grades)
+
+print(f"The average grade (excluding lowest) is: {average:.2f}")
+
+
+
+grades = [70, 80, 82, 90, 65, 92, 85, 100, 82]
+
+# Define threshold
+threshold = 75
+
+# Create a new list of grades above the threshold
+filtered_grades = [grade for grade in grades if grade >= threshold]
+
+# Calculate the sum
+total = sum(filtered_grades)
+
+# Compute the average
+average = total / len(filtered_grades)
+
+print(f"The average of grades ≥ {threshold} is: {average:.2f}")
+
+
+
 
 
 sales = [200, 1500, 3000, 100, 5000]
