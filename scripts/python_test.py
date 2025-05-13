@@ -8,6 +8,18 @@ for i in range(1, 5):
     print(f"Folder '{folder_name}' created.")
 
 
+# Get user input and separate characters
+number = input("Enter a five-digit integer: ")
+
+# Ensure the input is exactly five digits
+if len(number) == 5 and number.isdigit():
+    # Print each digit separated by three spaces
+    print("   ".join(number))
+else:
+    print("Invalid input! Please enter a five-digit integer.")
+
+
+
 sales = [200, 1500, 3000, 100, 5000]
 for sale in sales:
     if sale > 2500:
