@@ -159,6 +159,25 @@ print(f"The average of grades ≥ {threshold} is: {average:.2f}")
 
 
 
+grades = [70, 80, 82, 90, 65, 92, 85, 100, 82]
+
+# Get threshold from user input
+threshold = int(input("Enter a threshold value: "))
+
+# Filter grades based on the user-provided threshold
+filtered_grades = [grade for grade in grades if grade >= threshold]
+
+# Ensure there's at least one grade above the threshold
+if filtered_grades:
+    average = sum(filtered_grades) / len(filtered_grades)
+    print(f"The average of grades ≥ {threshold} is: {average:.2f}")
+else:
+    print(f"No grades are ≥ {threshold}. Try a lower threshold.")
+
+
+
+
+
 
 
 sales = [200, 1500, 3000, 100, 5000]
