@@ -7,9 +7,155 @@ for i in range(1, 5):
     Path(folder_name).mkdir(exist_ok=True)
     print(f"Folder '{folder_name}' created.")
 
+#create a beautiful spiral pattern using a loop
+import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+turtle.bgcolor("black")
+
+colors = ["red", "blue", "green", "yellow", "purple", "orange"]
+
+for i in range(100):
+    t.color(colors[i % len(colors)])
+    t.forward(i * 2)
+    t.right(59)
+
+turtle.done()
+
+
+
+
+# create Olympic rings
+import turtle
+
+rings = [(-120, 0, "blue"), (0, 0, "black"), (120, 0, "red"),
+         (-60, -50, "yellow"), (60, -50, "green")]
+
+turtle.bgcolor("white")
+
+for x, y, color in rings:
+    t = turtle.Turtle()
+    t.color(color)
+    t.width(10)
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+    t.circle(60)
+
+turtle.done()
+
+
+
+
+
 
 # multiples of 5 starting at number 3
 multiples3 =  [x for x in range(3, 30, 5)]
+
+# generator expression that cubes the even integers in a list
+list(x ** 3 for x in [10, 3, 7, 1, 9, 4, 2] if x % 2 == 0)
+
+
+# roll dice 5,000,000 times
+import random
+from collections import Counter
+
+# Number of rolls
+num_rolls = 5_000_000
+
+# Simulate rolling a six-sided die
+rolls = [random.randint(1, 6) for _ in range(num_rolls)]
+
+# Count occurrences of each outcome
+outcome_counts = Counter(rolls)
+
+# Display results
+for face, count in sorted(outcome_counts.items()):
+    print(f"Face {face}: {count} times")
+
+
+# find all prime number in 1 through 10,000
+def sieve_of_eratosthenes(limit):
+    primes = [True] * (limit + 1)  # Assume all numbers are prime initially
+    primes[0] = primes[1] = False  # 0 and 1 are not prime
+
+    for num in range(2, int(limit**0.5) + 1):  # Only go up to the square root of the limit
+        if primes[num]:  # If num is still prime, mark multiples as not prime
+            for multiple in range(num * num, limit + 1, num):
+                primes[multiple] = False
+
+    return [num for num in range(limit + 1) if primes[num]]  # Collect all prime numbers
+
+# Find primes from 1 to 10,000
+prime_numbers = sieve_of_eratosthenes(10_000)
+
+# Print the result
+print(prime_numbers)
+
+
+# test if word is a palindrome
+def is_palindrome(s):
+    # Normalize the string by removing spaces and converting to lowercase
+    s = s.replace(" ", "").lower()
+    
+    # Check if the string is equal to its reverse
+    return s == s[::-1]
+
+# Example usage
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))    # False
+print(is_palindrome("A Santa at NASA"))  # True
+
+
+
+# print all anagrams of an input word...
+from itertools import permutations
+
+def generate_anagrams(s):
+    # Create all possible permutations of the given string
+    anagrams = set(''.join(p) for p in permutations(s))
+    
+    return sorted(anagrams)  # Sorting for readability
+
+# Example usage
+word = "abc"
+anagrams = generate_anagrams(word)
+
+# Print the results
+print(anagrams)
+
+
+
+# Print every possible word for a given phone number
+from itertools import product
+
+# Mapping of digits to letters (like on a phone keypad)
+digit_to_letters = {
+    "2": "ABC", "3": "DEF", "4": "GHI",
+    "5": "JKL", "6": "MNO", "7": "PQRS",
+    "8": "TUV", "9": "WXYZ"
+}
+
+def generate_word_combinations(phone_number):
+    if len(phone_number) != 7 or not phone_number.isdigit():
+        return "Please enter a valid seven-digit number."
+
+    # Get the possible letters for each digit
+    letter_options = [digit_to_letters[d] for d in phone_number if d in digit_to_letters]
+
+    # Generate all possible letter combinations
+    possible_words = [''.join(combo) for combo in product(*letter_options)]
+
+    return possible_words
+
+# Example usage
+phone_number = "2345678"
+word_combinations = generate_word_combinations(phone_number)
+
+# Display a sample of results
+print(word_combinations[:20])  # Show only first 20 combinations for readability
+
 
 
 
