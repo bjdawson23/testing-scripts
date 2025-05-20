@@ -118,6 +118,26 @@ else:
 
 
 
+# cube each element of a list, calls it with the list containing numbers 1 through 10, and then displays the modified list
+def cube_elements(lst):
+    return [x**3 for x in lst]
+
+# Define the list
+numbers = list(range(1, 11))
+
+# Call the function
+cubed_numbers = cube_elements(numbers)
+
+# Show the result
+print(cubed_numbers)
+
+This function uses list comprehension to efficiently cube each element in the given list. After calling it, the output will be:
+[1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+
+
+
+
+
 
 # Get user input for initial population and growth rate
 current_population = int(input("Enter the current world population: "))
