@@ -8,6 +8,12 @@ for i in range(1, 5):
     print(f"Folder '{folder_name}' created.")
 
 
+# multiples of 5 starting at number 3
+multiples3 =  [x for x in range(3, 30, 5)]
+
+
+
+
 # Get user input and separate characters
 number = input("Enter a five-digit integer: ")
 
