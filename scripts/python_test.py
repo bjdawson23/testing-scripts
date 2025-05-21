@@ -47,6 +47,724 @@ turtle.done()
 
 
 
+# format two dimensional list into tabular look
+def display_table(matrix):
+    if not matrix:
+        print("Empty matrix.")
+        return
+
+    num_columns = len(matrix[0])
+
+    # Print column indices as headers
+    print("    ", end="")  # Space for row index
+    for col in range(num_columns):
+        print(f"{col:>4}", end="")  # Right-aligned column numbers
+    print("\n" + "-" * (num_columns * 4 + 4))  # Divider
+
+    # Print rows with row indices
+    for row_index, row in enumerate(matrix):
+        print(f"{row_index:>2} |", end="")  # Row index
+        for value in row:
+            print(f"{value:>4}", end="")  # Right-aligned values
+        print()
+
+# Example usage
+data = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+display_table(data)
+
+
+# same as above with nice format
+def display_table(matrix):
+    if not matrix:
+        print("Empty matrix.")
+        return
+
+    num_columns = len(matrix[0])
+
+    # Print column indices as headers (centered)
+    print("    ", end="")  # Space for row index
+    for col in range(num_columns):
+        print(f"{col:^6}", end="")  # Adjust column width
+    print("\n" + "=" * (num_columns * 6 + 6))  # Divider with '='
+
+    # Print rows with row indices
+    for row_index, row in enumerate(matrix):
+        print(f"{row_index:^2} |", end="")  # Row index
+        for value in row:
+            print(f"{value:^6}|", end="")  # Centered and adds grid lines
+        print("\n" + "-" * (num_columns * 6 + 6))  # Row separator
+
+# Example usage
+data = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+display_table(data)
+
+
+
+
+
+# Sample dictionary usage
+sample_dict = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York",
+    "skills": ["Python", "Data Science", "Machine Learning"]
+}
+
+# Accessing values
+print(sample_dict["name"])  # Output: Alice
+
+# Adding a new key-value pair
+sample_dict["job"] = "Software Engineer"
+
+# Iterating over dictionary items
+for key, value in sample_dict.items():
+    print(f"{key}: {value}")
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade of a student and ave of the total
+def calculate_average(grades):
+    return sum(grades.values()) / len(grades)
+
+# Function to calculate the overall average grade of all students
+def calculate_overall_average(student_grades):
+    total_sum = 0
+    total_count = 0
+    for grades in student_grades.values():
+        total_sum += sum(grades.values())
+        total_count += len(grades)
+    return total_sum / total_count
+
+# Displaying each student's grades and their average
+for student, grades in student_grades.items():
+    student_average = calculate_average(grades)
+    print(f"{student}: {grades}, Average Grade: {student_average:.2f}")
+
+# Calculating and displaying overall average
+overall_average = calculate_overall_average(student_grades)
+print(f"\nOverall Average Grade of All Students: {overall_average:.2f}")
+
+
+
+
+
+# with a graph by subject
+import matplotlib.pyplot as plt
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade per subject
+def calculate_subject_averages(student_grades):
+    subject_totals = {}
+    subject_counts = {}
+
+    for grades in student_grades.values():
+        for subject, grade in grades.items():
+            subject_totals[subject] = subject_totals.get(subject, 0) + grade
+            subject_counts[subject] = subject_counts.get(subject, 0) + 1
+
+    return {subject: subject_totals[subject] / subject_counts[subject] for subject in subject_totals}
+
+# Calculate subject averages
+subject_averages = calculate_subject_averages(student_grades)
+
+# Plotting the data
+subjects = list(subject_averages.keys())
+averages = list(subject_averages.values())
+
+plt.figure(figsize=(8, 5))
+plt.bar(subjects, averages, color=['blue', 'green', 'red', 'purple', 'orange'])
+plt.xlabel("Subjects")
+plt.ylabel("Average Grade")
+plt.title("Average Grade Per Subject")
+plt.ylim(0, 100)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Show the graph
+plt.show()
+
+
+
+
+# pie chart with numbers on it
+import matplotlib.pyplot as plt
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade per subject
+def calculate_subject_averages(student_grades):
+    subject_totals = {}
+    subject_counts = {}
+
+    for grades in student_grades.values():
+        for subject, grade in grades.items():
+            subject_totals[subject] = subject_totals.get(subject, 0) + grade
+            subject_counts[subject] = subject_counts.get(subject, 0) + 1
+
+    return {subject: subject_totals[subject] / subject_counts[subject] for subject in subject_totals}
+
+# Calculate subject averages
+subject_averages = calculate_subject_averages(student_grades)
+
+# Plotting the data
+subjects = list(subject_averages.keys())
+averages = list(subject_averages.values())
+
+plt.figure(figsize=(8, 8))
+plt.pie(averages, labels=subjects, autopct="%1.1f%%", startangle=140, colors=['blue', 'green', 'red', 'purple', 'orange'])
+plt.title("Average Grade Per Subject")
+plt.show()
+
+
+
+
+# pie chart with numbers and percentages on it
+import matplotlib.pyplot as plt
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade per subject
+def calculate_subject_averages(student_grades):
+    subject_totals = {}
+    subject_counts = {}
+
+    for grades in student_grades.values():
+        for subject, grade in grades.items():
+            subject_totals[subject] = subject_totals.get(subject, 0) + grade
+            subject_counts[subject] = subject_counts.get(subject, 0) + 1
+
+    return {subject: subject_totals[subject] / subject_counts[subject] for subject in subject_totals}
+
+# Calculate subject averages
+subject_averages = calculate_subject_averages(student_grades)
+
+# Prepare data for pie chart
+subjects = list(subject_averages.keys())
+averages = list(subject_averages.values())
+
+# Define color palette
+colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99','#c2c2f0']
+
+plt.figure(figsize=(8, 8))
+
+# Formatting labels to include actual values
+def format_labels(pct, all_avg):
+    absolute = int(round(pct * sum(all_avg) / 100, 0))
+    return f"{absolute} ({pct:.1f}%)"
+
+plt.pie(averages, labels=subjects, autopct=lambda pct: format_labels(pct, averages), startangle=140, colors=colors, wedgeprops={'edgecolor': 'black'})
+
+plt.title("Average Grade Per Subject")
+plt.show()
+
+
+
+
+# pie chart with nice visuals and legend
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade per subject
+def calculate_subject_averages(student_grades):
+    subject_totals = {}
+    subject_counts = {}
+
+    for grades in student_grades.values():
+        for subject, grade in grades.items():
+            subject_totals[subject] = subject_totals.get(subject, 0) + grade
+            subject_counts[subject] = subject_counts.get(subject, 0) + 1
+
+    return {subject: subject_totals[subject] / subject_counts[subject] for subject in subject_totals}
+
+# Calculate subject averages
+subject_averages = calculate_subject_averages(student_grades)
+
+# Prepare data for pie chart
+subjects = list(subject_averages.keys())
+averages = list(subject_averages.values())
+
+# Use seaborn color palette for better aesthetics
+colors = sns.color_palette("pastel")
+
+plt.figure(figsize=(8, 8))
+
+# Explode effect to highlight slices
+explode_values = [0.05] * len(subjects)  # Slightly separate all slices
+
+# Formatting labels to include actual values
+def format_labels(pct, all_avg):
+    absolute = int(round(pct * sum(all_avg) / 100, 0))
+    return f"{absolute} ({pct:.1f}%)"
+
+wedges, texts, autotexts = plt.pie(
+    averages, labels=subjects, autopct=lambda pct: format_labels(pct, averages),
+    startangle=140, colors=colors, explode=explode_values, shadow=True, wedgeprops={'edgecolor': 'black'}
+)
+
+# Adjust text formatting
+for text in texts:
+    text.set_fontsize(12)
+    text.set_fontweight("bold")
+
+for autotext in autotexts:
+    autotext.set_fontsize(10)
+    autotext.set_fontweight("bold")
+
+# Adding a legend
+plt.legend(wedges, subjects, title="Subjects", loc="upper right", fontsize=10, title_fontsize=12)
+
+plt.title("Average Grade Per Subject", fontsize=14, fontweight='bold')
+plt.show()
+
+
+
+
+# pie chart with fade in and out affect
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import matplotlib.animation as animation
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade per subject
+def calculate_subject_averages(student_grades):
+    subject_totals = {}
+    subject_counts = {}
+
+    for grades in student_grades.values():
+        for subject, grade in grades.items():
+            subject_totals[subject] = subject_totals.get(subject, 0) + grade
+            subject_counts[subject] = subject_counts.get(subject, 0) + 1
+
+    return {subject: subject_totals[subject] / subject_counts[subject] for subject in subject_totals}
+
+# Calculate subject averages
+subject_averages = calculate_subject_averages(student_grades)
+
+# Prepare data for pie chart
+subjects = list(subject_averages.keys())
+averages = list(subject_averages.values())
+
+# Use Seaborn color palette
+colors = sns.color_palette("coolwarm", len(subjects))
+
+fig, ax = plt.subplots(figsize=(8, 8))
+
+# Function to animate the fade-in effect
+def animate(frame):
+    ax.clear()
+    fade_factor = frame / 50  # Gradual fade-in from 0 to 1
+    explode_values = [0.05 * fade_factor for _ in subjects]  
+    ax.pie(averages, labels=subjects, autopct="%1.1f%%", startangle=90,
+           colors=[(r * fade_factor, g * fade_factor, b * fade_factor) for r, g, b in colors], 
+           explode=explode_values, shadow=True, wedgeprops={'edgecolor': 'black'})
+
+# Creating the animation
+ani = animation.FuncAnimation(fig, animate, frames=50, interval=100)
+
+plt.title("Animated Pie Chart: Fade-In Effect on Average Grades", fontsize=14, fontweight='bold', color="midnightblue")
+plt.show()
+
+
+
+
+
+# Sample word count program using a dictionary
+def word_count(text):
+    word_freq = {}  # Dictionary to store word frequencies
+    words = text.lower().split()  # Convert text to lowercase and split into words
+    
+    for word in words:
+        word = word.strip(",.!?()[]{}\"'")  # Remove punctuation
+        word_freq[word] = word_freq.get(word, 0) + 1  # Count occurrences
+    
+    return word_freq
+
+# Example usage
+text = "Python is great. Python is easy! Learn Python, it's fun!"
+word_counts = word_count(text)
+
+# Print word frequencies
+for word, count in word_counts.items():
+    print(f"{word}: {count}")
+
+
+
+
+# Word count program with file reading and sorting
+def word_count_from_file(filename):
+    word_freq = {}  # Dictionary to store word frequencies
+    
+    with open(filename, "r", encoding="utf-8") as file:
+        for line in file:
+            words = line.lower().split()  # Convert text to lowercase and split into words
+            for word in words:
+                word = word.strip(",.!?()[]{}\"'")  # Remove punctuation
+                word_freq[word] = word_freq.get(word, 0) + 1  # Count occurrences
+    
+    # Sort dictionary by frequency in descending order
+    sorted_word_freq = dict(sorted(word_freq.items(), key=lambda item: item[1], reverse=True))
+    
+    return sorted_word_freq
+
+# Example usage
+filename = "sample.txt"  # Replace with your file name
+word_counts = word_count_from_file(filename)
+
+# Print sorted word frequencies
+for word, count in word_counts.items():
+    print(f"{word}: {count}")
+
+
+
+# word count excluding common stopwords and plotting it to a graph
+import matplotlib.pyplot as plt
+
+# Define common stopwords
+stopwords = {"the", "and", "is", "in", "on", "at", "to", "for", "with", "of", "a", "an", "that", "this"}
+
+# Word count program with file reading, sorting, and visualization
+def word_count_from_file(filename):
+    word_freq = {}  # Dictionary to store word frequencies
+    
+    with open(filename, "r", encoding="utf-8") as file:
+        for line in file:
+            words = line.lower().split()  # Convert text to lowercase and split into words
+            for word in words:
+                word = word.strip(",.!?()[]{}\"'")  # Remove punctuation
+                if word not in stopwords:  # Exclude stopwords
+                    word_freq[word] = word_freq.get(word, 0) + 1  # Count occurrences
+    
+    # Sort dictionary by frequency in descending order
+    sorted_word_freq = dict(sorted(word_freq.items(), key=lambda item: item[1], reverse=True))
+    
+    return sorted_word_freq
+
+# Function to visualize word frequency
+def plot_word_frequencies(word_freq):
+    words = list(word_freq.keys())[:10]  # Get top 10 most frequent words
+    counts = list(word_freq.values())[:10]
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(words, counts, color="skyblue")
+    plt.xlabel("Words")
+    plt.ylabel("Frequency")
+    plt.title("Top 10 Most Frequent Words (Excluding Stopwords)")
+    plt.xticks(rotation=45)
+    plt.show()
+
+# Example usage
+filename = "sample.txt"  # Replace with your file name
+word_counts = word_count_from_file(filename)
+
+# Display word count results
+for word, count in word_counts.items():
+    print(f"{word}: {count}")
+
+# Visualize word frequencies
+plot_word_frequencies(word_counts)
+
+
+
+# word count with interactive menu to word search, graph, filter by frequencey, top words
+import matplotlib.pyplot as plt
+
+# Define common stopwords
+stopwords = {"the", "and", "is", "in", "on", "at", "to", "for", "with", "of", "a", "an", "that", "this"}
+
+# Word count program with interactive search and filtering
+def word_count_from_file(filename):
+    word_freq = {}  # Dictionary to store word frequencies
+    
+    with open(filename, "r", encoding="utf-8") as file:
+        for line in file:
+            words = line.lower().split()  # Convert text to lowercase and split into words
+            for word in words:
+                word = word.strip(",.!?()[]{}\"'")  # Remove punctuation
+                if word not in stopwords:  # Exclude stopwords
+                    word_freq[word] = word_freq.get(word, 0) + 1  # Count occurrences
+    
+    # Sort dictionary by frequency in descending order
+    sorted_word_freq = dict(sorted(word_freq.items(), key=lambda item: item[1], reverse=True))
+    
+    return sorted_word_freq
+
+# Function to search for a word interactively
+def search_word(word_freq):
+    word = input("\nEnter a word to check frequency: ").lower().strip()
+    print(f"\n'{word}' appears {word_freq.get(word, 0)} times.")
+
+# Function to filter words based on frequency threshold
+def filter_words(word_freq):
+    min_count = int(input("\nEnter minimum frequency to display words: "))
+    filtered = {word: count for word, count in word_freq.items() if count >= min_count}
+    print("\nFiltered word counts:")
+    for word, count in filtered.items():
+        print(f"{word}: {count}")
+
+# Function to visualize word frequency
+def plot_word_frequencies(word_freq):
+    words = list(word_freq.keys())[:10]  # Get top 10 most frequent words
+    counts = list(word_freq.values())[:10]
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(words, counts, color="skyblue")
+    plt.xlabel("Words")
+    plt.ylabel("Frequency")
+    plt.title("Top 10 Most Frequent Words (Excluding Stopwords)")
+    plt.xticks(rotation=45)
+    plt.show()
+
+# Example usage
+filename = "sample.txt"  # Replace with your file name
+word_counts = word_count_from_file(filename)
+
+# Main interactive menu
+while True:
+    print("\nInteractive Word Count Menu:")
+    print("1. View top words")
+    print("2. Search for a word")
+    print("3. Filter by frequency")
+    print("4. Show word frequency graph")
+    print("5. Exit")
+    
+    choice = input("\nEnter your choice: ")
+    
+    if choice == "1":
+        for word, count in word_counts.items():
+            print(f"{word}: {count}")
+    elif choice == "2":
+        search_word(word_counts)
+    elif choice == "3":
+        filter_words(word_counts)
+    elif choice == "4":
+        plot_word_frequencies(word_counts)
+    elif choice == "5":
+        print("Goodbye!")
+        break
+    else:
+        print("\nInvalid choice! Please enter a number between 1 and 5.")
+
+
+
+# list comprehension to generate 50 randome numbers (1-5) and display in two columns
+import random
+from collections import Counter
+
+# Generate a list of 50 random integers in the range 1–5
+random_numbers = [random.randint(1, 5) for _ in range(50)]
+
+# Summarize with Counter
+counts = Counter(random_numbers)
+
+# Display results in two-column format
+print("Number | Count")
+print("----------------")
+for number, count in sorted(counts.items()):
+    print(f"{number:<7} | {count}")
+
+
+# list comprehension to generate 50 randome numbers (1-5) and display tabular and sorted
+import random
+from collections import Counter
+
+# Generate a list of 50 random integers in the range 1–5
+random_numbers = [random.randint(1, 5) for _ in range(50)]
+
+# Summarize with Counter
+counts = Counter(random_numbers)
+
+# Sort results by highest occurrence first
+sorted_counts = sorted(counts.items(), key=lambda item: item[1], reverse=True)
+
+# Display results in a well-formatted table
+print(f"{'Number':<10}{'Count':<10}")
+print("-" * 20)
+
+for number, count in sorted_counts:
+    print(f"{number:<10}{count:<10}")
+
+# list comprehension to generate 50 randome numbers (1-5) and display tabular and sorted with graph
+import random
+import matplotlib.pyplot as plt
+from collections import Counter
+
+# Generate a list of 50 random integers in the range 1–5
+random_numbers = [random.randint(1, 5) for _ in range(50)]
+
+# Summarize with Counter
+counts = Counter(random_numbers)
+
+# Sort results by highest occurrence first
+sorted_counts = sorted(counts.items(), key=lambda item: item[1], reverse=True)
+
+# Extract values for plotting
+numbers = [num for num, count in sorted_counts]
+frequencies = [count for num, count in sorted_counts]
+
+# Plot bar chart
+plt.figure(figsize=(8, 5))
+plt.bar(numbers, frequencies, color='skyblue', edgecolor='black')
+plt.xlabel("Numbers")
+plt.ylabel("Frequency")
+plt.title("Frequency of Randomly Generated Numbers (1–5)")
+plt.xticks(numbers)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+
+
+
+
+
+# line with numbers on it
+import matplotlib.pyplot as plt
+
+# Dictionary of student grades
+student_grades = {
+    "Alice": {"Math": 85, "Science": 90, "English": 88, "History": 92, "Art": 95},
+    "Bob": {"Math": 78, "Science": 83, "English": 80, "History": 76, "Art": 82},
+    "Charlie": {"Math": 92, "Science": 89, "English": 94, "History": 88, "Art": 90},
+    "David": {"Math": 76, "Science": 80, "English": 75, "History": 72, "Art": 78},
+    "Emma": {"Math": 88, "Science": 86, "English": 91, "History": 85, "Art": 87}
+}
+
+# Function to calculate the average grade per subject
+def calculate_subject_averages(student_grades):
+    subject_totals = {}
+    subject_counts = {}
+
+    for grades in student_grades.values():
+        for subject, grade in grades.items():
+            subject_totals[subject] = subject_totals.get(subject, 0) + grade
+            subject_counts[subject] = subject_counts.get(subject, 0) + 1
+
+    return {subject: subject_totals[subject] / subject_counts[subject] for subject in subject_totals}
+
+# Calculate subject averages
+subject_averages = calculate_subject_averages(student_grades)
+
+# Plotting the data
+subjects = list(subject_averages.keys())
+averages = list(subject_averages.values())
+
+plt.figure(figsize=(8, 5))
+plt.plot(subjects, averages, marker='o', linestyle='-', color='blue', label="Average Grade")
+plt.xlabel("Subjects")
+plt.ylabel("Average Grade")
+plt.title("Average Grade Per Subject")
+plt.ylim(0, 100)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Adding data labels
+for i, avg in enumerate(averages):
+    plt.text(subjects[i], avg, f"{avg:.2f}", ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+plt.legend()
+plt.show()
+
+
+
+
+
+
+# rolling two six-sided dice creates 36 possible outcomes, the number 7 will be the most frequent sum while 2 and 12 will be the least frequent
+import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+from collections import Counter
+
+def roll_dice_simulation(num_rolls):
+    sums = [random.randint(1, 6) + random.randint(1, 6) for _ in range(num_rolls)]
+    
+    # Count occurrences of each sum (2-12)
+    sum_counts = Counter(sums)
+    
+    # Create a sorted list of sums (2 to 12)
+    possible_sums = list(range(2, 13))
+    frequencies = [sum_counts.get(sum_value, 0) for sum_value in possible_sums]
+
+    return possible_sums, frequencies
+
+def plot_dice_sums(num_rolls):
+    possible_sums, frequencies = roll_dice_simulation(num_rolls)
+
+    # Create DataFrame for Seaborn
+    import pandas as pd
+    df = pd.DataFrame({"Sum": possible_sums, "Frequency": frequencies})
+
+    # Plot using horizontal bar chart
+    plt.figure(figsize=(10, 6))
+    sns.barplot(y="Sum", x="Frequency", data=df, palette="coolwarm", orient="h")
+
+    plt.xlabel("Frequency")
+    plt.ylabel("Sum of Two Dice")
+    plt.title(f"Dice Roll Sum Frequencies for {num_rolls} Rolls")
+    plt.show()
+
+# Example usage
+plot_dice_sums(10000)  # Simulate rolling two dice 10,000 times
+
+
+
+
+
+
+
 
 
 
