@@ -1,5 +1,311 @@
 # Online Python - IDE, Editor, Compiler, Interpreter
 
+
+# dictionary comprehension to create a dictionary of the numbers 1–5 mapped to their cubes
+{number: number ** 3 for number in range(1, 6)}
+
+# set - unique set of values, so the below would only return 0-15
+nums = list(range(16)) + list(range(7))
+set(nums)
+
+# Unites the sets - 1, 2, 3, 4, 5
+{1, 3, 5} | {2, 3, 4}
+# diff between right and the left sets - 1, 5
+{1, 3, 5} -  {2, 3, 4}
+# intersection of right and the left sets - 3
+{1, 3, 5} &  {2, 3, 4}
+
+# set right side is a superset of the left side will = true
+set('h d a f g').issuperset('ha dad')
+
+
+
+# check writing - take value less than 1000 and convert to text
+# Dictionary mapping numbers to words
+num_words = {
+    0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
+    6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
+    11: "Eleven", 12: "Twelve", 13: "Thirteen", 14: "Fourteen", 15: "Fifteen",
+    16: "Sixteen", 17: "Seventeen", 18: "Eighteen", 19: "Nineteen", 20: "Twenty",
+    30: "Thirty", 40: "Forty", 50: "Fifty", 60: "Sixty", 70: "Seventy",
+    80: "Eighty", 90: "Ninety"
+}
+
+# Function to convert number into word equivalent
+def number_to_words(n):
+    if n < 20:
+        return num_words[n]
+    elif n < 100:
+        tens, remainder = divmod(n, 10)
+        return num_words[tens * 10] + ("-" + num_words[remainder] if remainder else "")
+    elif n < 1000:
+        hundreds, remainder = divmod(n, 100)
+        return num_words[hundreds] + " Hundred" + (" and " + number_to_words(remainder) if remainder else "")
+
+# User input for check amount
+amount = int(input("Enter a check amount (less than 1000): "))
+if 0 <= amount < 1000:
+    print(f"Check Amount in Words: {number_to_words(amount)} Dollars")
+else:
+    print("Invalid amount. Please enter a number less than 1000.")
+
+
+
+# check value any number 
+# Dictionary mapping numbers to words
+num_words = {
+    0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
+    6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
+    11: "Eleven", 12: "Twelve", 13: "Thirteen", 14: "Fourteen", 15: "Fifteen",
+    16: "Sixteen", 17: "Seventeen", 18: "Eighteen", 19: "Nineteen", 20: "Twenty",
+    30: "Thirty", 40: "Forty", 50: "Fifty", 60: "Sixty", 70: "Seventy",
+    80: "Eighty", 90: "Ninety"
+}
+
+# Number scale words
+num_scales = [(1000000, "Million"), (1000, "Thousand"), (100, "Hundred")]
+
+# Function to convert number into words recursively
+def number_to_words(n):
+    if n < 20:
+        return num_words[n]
+    elif n < 100:
+        tens, remainder = divmod(n, 10)
+        return num_words[tens * 10] + ("-" + num_words[remainder] if remainder else "")
+    for value, name in num_scales:
+        if n >= value:
+            leading, remainder = divmod(n, value)
+            return number_to_words(leading) + f" {name}" + (" " + number_to_words(remainder) if remainder else "")
+
+# Function to convert a check amount to words (including cents)
+def check_amount_to_words(amount):
+    dollars = int(amount)  # Extract whole dollar part
+    cents = round((amount - dollars) * 100)  # Extract cents
+    
+    dollar_words = number_to_words(dollars) + " Dollars"
+    cent_words = number_to_words(cents) + " Cents" if cents > 0 else ""
+
+    return f"{dollar_words} and {cent_words}" if cents > 0 else dollar_words
+
+# User input for check amount
+amount = float(input("Enter a check amount (any value): "))
+if amount >= 0:
+    print(f"Check Amount in Words: {check_amount_to_words(amount)}")
+else:
+    print("Invalid amount. Please enter a positive number.")
+
+
+
+
+# check any amount by region
+# Dictionary mapping numbers to words
+num_words = {
+    0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
+    6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
+    11: "Eleven", 12: "Twelve", 13: "Thirteen", 14: "Fourteen", 15: "Fifteen",
+    16: "Sixteen", 17: "Seventeen", 18: "Eighteen", 19: "Nineteen", 20: "Twenty",
+    30: "Thirty", 40: "Forty", 50: "Fifty", 60: "Sixty", 70: "Seventy",
+    80: "Eighty", 90: "Ninety"
+}
+
+# Number scale words
+num_scales = [(1000000, "Million"), (1000, "Thousand"), (100, "Hundred")]
+
+# Currency symbols and names
+currency_data = {
+    "USD": ("Dollars", "Cents"),
+    "EUR": ("Euros", "Cents"),
+    "GBP": ("Pounds", "Pence"),
+    "INR": ("Rupees", "Paise")
+}
+
+# Function to convert number into words
+def number_to_words(n):
+    if n < 20:
+        return num_words[n]
+    elif n < 100:
+        tens, remainder = divmod(n, 10)
+        return num_words[tens * 10] + ("-" + num_words[remainder] if remainder else "")
+    for value, name in num_scales:
+        if n >= value:
+            leading, remainder = divmod(n, value)
+            return number_to_words(leading) + f" {name}" + (" " + number_to_words(remainder) if remainder else "")
+
+# Function to convert check amount to words with currency
+def check_amount_to_words(amount, currency="USD"):
+    dollars = int(amount)  
+    cents = round((amount - dollars) * 100)  
+
+    currency_name, cent_name = currency_data.get(currency, ("Dollars", "Cents"))
+    
+    dollar_words = number_to_words(dollars) + f" {currency_name}"
+    cent_words = number_to_words(cents) + f" {cent_name}" if cents > 0 else ""
+
+    return f"{dollar_words} and {cent_words}" if cents > 0 else dollar_words
+
+# User input for check amount
+amount = float(input("Enter check amount: "))
+currency = input("Enter currency (USD, EUR, GBP, INR): ").upper()
+
+if amount >= 0 and currency in currency_data:
+    print(f"Check Amount in Words: {check_amount_to_words(amount, currency)}")
+else:
+    print("Invalid input. Please enter a valid amount and currency.")
+
+
+
+
+# check with name and generate QR code
+import qrcode
+
+# Function to generate QR code for payment details
+def generate_qr_code(recipient, amount, date):
+    check_details = f"Recipient: {recipient}\nAmount: ${amount:.2f}\nDate: {date}"
+    qr = qrcode.make(check_details)
+    
+    # Save the QR code image
+    qr.save("check_qr.png")
+    print("QR Code generated and saved as 'check_qr.png'.")
+
+# Example usage
+recipient = input("Enter recipient name: ")
+amount = float(input("Enter check amount: "))
+date = input("Enter check date (YYYY-MM-DD): ")
+
+generate_qr_code(recipient, amount, date)
+
+
+
+
+
+
+
+
+
+# basic text slicing for list, tuples or strings
+text = "Python is fun"
+print(text[0:6])   # Output: Python
+print(text[7:])    # Output: is fun
+print(text[:6])    # Output: Python
+print(text[::-1])  # Output: nuf si nohtyP (Reversed)
+
+data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(data[1:8:2])  # Output: [2, 4, 6, 8]
+print(data[::-2])   # Output: [9, 7, 5, 3, 1] (Reverse skipping)
+
+# sorting 
+from itertools import groupby
+
+data = [("Apple", "Fruit"), ("Banana", "Fruit"), ("Carrot", "Vegetable"), ("Tomato", "Fruit"), ("Spinach", "Vegetable")]
+
+
+# Sort first before grouping
+data.sort(key=lambda x: x[1])
+
+# Group by category
+for category, items in groupby(data, key=lambda x: x[1]):
+    print(f"{category}: {[item[0] for item in items]}")
+
+import pandas as pd
+
+data = {"Name": ["Alice", "Bob", "Charlie", "David", "Emma"],
+        "Department": ["HR", "IT", "HR", "Finance", "IT"],
+        "Salary": [50000, 60000, 52000, 58000, 62000]}
+
+df = pd.DataFrame(data)
+
+# Grouping by Department
+grouped = df.groupby("Department")["Salary"].mean()
+
+print(grouped)
+
+
+# sort within each group 
+import pandas as pd
+
+# Sample Data
+data = {"Name": ["Alice", "Bob", "Charlie", "David", "Emma"],
+        "Department": ["HR", "IT", "HR", "Finance", "IT"],
+        "Salary": [50000, 60000, 52000, 58000, 62000]}
+
+df = pd.DataFrame(data)
+
+# Sorting within each group by Salary in descending order
+df_sorted = df.sort_values(["Department", "Salary"], ascending=[True, False])
+
+print(df_sorted)
+
+
+
+# sales breakdown by department
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Sample Data
+data = {"Name": ["Alice", "Bob", "Charlie", "David", "Emma"],
+        "Department": ["HR", "IT", "HR", "Finance", "IT"],
+        "Salary": [50000, 60000, 52000, 58000, 62000]}
+
+df = pd.DataFrame(data)
+
+# Sorting within each department
+df_sorted = df.sort_values(["Department", "Salary"], ascending=[True, False])
+
+# Create an interactive Seaborn bar plot
+plt.figure(figsize=(8, 5))
+sns.barplot(x="Department", y="Salary", data=df_sorted, hue="Name", palette="coolwarm", edgecolor="black")
+
+plt.xlabel("Department")
+plt.ylabel("Salary")
+plt.title("Sorted Salary Breakdown by Department")
+plt.legend(title="Employee")
+plt.grid(axis='y', linestyle="--", alpha=0.7)
+plt.show()
+
+
+
+
+# Salary progression over time line chart 
+
+
+import numpy as np
+
+# Simulating salary trends over 5 years
+years = np.arange(2020, 2025)
+salary_trends = {
+    "Alice": [50000, 52000, 54000, 56000, 58000],
+    "Bob": [60000, 62000, 64000, 66000, 68000],
+    "Charlie": [52000, 54000, 56000, 58000, 60000],
+    "David": [58000, 60000, 62000, 64000, 66000],
+    "Emma": [62000, 64000, 66000, 68000, 70000],
+}
+
+# Convert dictionary to DataFrame
+df_trends = pd.DataFrame(salary_trends, index=years)
+
+# Plot interactive line chart
+plt.figure(figsize=(8, 5))
+for employee in df_trends.columns:
+    plt.plot(df_trends.index, df_trends[employee], marker="o", label=employee)
+
+plt.xlabel("Year")
+plt.ylabel("Salary")
+plt.title("Salary Progression Over 5 Years")
+plt.legend(title="Employee")
+plt.grid(True)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
 from pathlib import Path
 
 for i in range(1, 5):
